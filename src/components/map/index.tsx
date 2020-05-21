@@ -39,7 +39,7 @@ const ControlWrapper = styled.div<StyledProps>`
 let map = null;
 let selectedStateId = false;
 
-const MAPBOX_TOKEN = process.env.API_KEY;
+const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2FubnNpZSIsImEiOiJja2FndTc0ajAwOXlwMnBvNGl6dW16MjVpIn0.2vuHVqIK5bDNcoWMmi3VtQ';
 
 class DeckGLMap extends React.Component {
   constructor(props) {
@@ -121,7 +121,8 @@ class DeckGLMap extends React.Component {
             } = this.props;
             const { properties } = info;
             // eslint-disable-next-line @typescript-eslint/camelcase
-            const { id, radolan_sum, age } = properties;
+            const { id, radolan_sum, age, pflanzjahr } = properties;
+            const age = 2020 - Pflanzjahr;
 
             if (dataView === 'watered' && communityData[id]) {
               return communityData[id].watered
@@ -531,7 +532,7 @@ class DeckGLMap extends React.Component {
     } = this.props;
 
     if (isLoading) {
-      return <span>Lade Berlins Baumdaten ...</span>;
+      return <span>Lade Leipzigs Baumdaten ...</span>;
     } else if (!isLoading) {
       return (
         <>
