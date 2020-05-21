@@ -79,7 +79,13 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
 
   const { getTokenSilently, isAuthenticated } = useAuth0();
 
-  const { standalter, artdtsch, gattungdeutsch, caretaker } = data;
+  const {
+    pflanzjahr,
+    artdtsch,
+    gattungdeutsch,
+    caretaker,
+  } = data;
+  const standalter = pflanzjahr && (2020 - parseInt(pflanzjahr));
 
   const getTreeProp = (p: Generic | string | null) => {
     return p === 'null' || p === undefined ? null : p;
@@ -151,22 +157,20 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
             <TreeType>{treeType.description}</TreeType>
           </CardAccordion>
         )}
-        {standalter && standalter !== 'undefined' && (
-          <CardProperty name='Standalter' value={standalter + ' Jahre'} />
-        )}
-        {standalter !== 'null' && standalter !== 'undefined' && (
-          <CardAccordion
-            title={
-              <CardAccordionTitle>
-                Wasserbedarf:
-                {standalter && (
-                  <CardWaterDrops data={waterNeed(parseInt(standalter))} />
-                )}
-              </CardAccordionTitle>
-            }
-          >
-            <TreeWatering data={watering} />
-          </CardAccordion>
+        { standalter && (
+          <>
+            <CardProperty name='Standalter' value={standalter + ' Jahre'} />
+            <CardAccordion
+              title={
+                <CardAccordionTitle>
+                  Wasserbedarf:
+                  <CardWaterDrops data={waterNeed(standalter)} />
+                </CardAccordionTitle>
+              }
+            >
+              <TreeWatering data={watering} />
+            </CardAccordion>
+          </>
         )}
         <RainContainer>
           <CardHeadline>Wassermenge</CardHeadline>
