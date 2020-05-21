@@ -154,7 +154,9 @@ class DeckGLMap extends React.Component {
               communityData,
             } = this.props;
             const { properties } = info;
-            const { id, radolan_sum, age } = properties;
+            // eslint-disable-next-line @typescript-eslint/camelcase
+            const { id, radolan_sum, age, pflanzjahr } = properties;
+            const age = 2020 - Pflanzjahr;
 
             if (dataView === 'watered' && communityData[id]) {
               return communityData[id].watered
@@ -597,7 +599,7 @@ class DeckGLMap extends React.Component {
     } = this.props;
 
     if (isTreeDataLoading) {
-      return <span>Lade Berlins Baumdaten ...</span>;
+      return <span>Lade Leipzigs Baumdaten ...</span>;
     } else if (!isTreeDataLoading) {
       return (
         <>

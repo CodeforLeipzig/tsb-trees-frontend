@@ -89,13 +89,14 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
   const { getTokenSilently, isAuthenticated } = useAuth0();
 
   const {
-    standalter,
-    radolan_sum,
-    artdtsch,
-    radolan_days,
-    gattungdeutsch,
+    Pflanzjahr,
+    radolan_sum = 100,
+    Baumart_wi: artdtsch,
+    radolan_days = [],
+    Baumart_de: gattungdeutsch,
     caretaker,
   } = data;
+  const standalter = 2020 - Pflanzjahr;
 
   const getTreeProp = (p: Generic | string | null) => {
     return p === 'null' || p === undefined ? null : p;
@@ -145,6 +146,7 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
     <CardWrapper>
       <FlexColumnDiv>
         <TreeTitle>{artdtsch}</TreeTitle>
+<<<<<<< HEAD:src/components/Card/Card.tsx
         {!treeType &&
           treeType !== 'undefined' &&
           gattungdeutsch !== null &&
@@ -159,6 +161,10 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
             <Icon iconType='water' height={32}></Icon>
             <CaretakerSublineSpan>{`Dieser Baum wird regelmäßig vom ${caretaker} gewässert.`}</CaretakerSublineSpan>
           </CaretakerDiv>
+=======
+        {!treeType && treeType !== 'undefined' && (
+          <SublineSpan>{getTreeProp(gattungdeutsch && gattungdeutsch.toLowerCase())}</SublineSpan>
+>>>>>>> dummy adpations to get running for Leipzig tree data:src/components/Card/index.tsx
         )}
         {treeAdopted && <ButtonAdopted />}
         {treeType && treeType.title !== null && (

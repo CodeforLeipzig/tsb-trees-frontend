@@ -58,7 +58,7 @@ const ResultElement = styled.li`
   }
 `;
 
-const MAPBOX_TOKEN = process.env.API_KEY;
+const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2FubnNpZSIsImEiOiJja2FndTc0ajAwOXlwMnBvNGl6dW16MjVpIn0.2vuHVqIK5bDNcoWMmi3VtQ';
 
 const SidebarSearchLocation: React.FC = () => {
   const { setViewport } = useActions(Actions);
@@ -70,7 +70,7 @@ const SidebarSearchLocation: React.FC = () => {
     setValue(e.target.value);
     try {
       if (e.target.value.length >= 3) {
-        const geocodingUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?autocomplete=true&language=de&country=de&bbox=13.0824446341071,52.3281202651866,13.7682544186827,52.681600197973&access_token=${MAPBOX_TOKEN}`;
+        const geocodingUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?autocomplete=true&language=de&country=de&bbox=12.236652,51.23817,12.542441,51.448114&access_token=${MAPBOX_TOKEN}`;
         const res = await fetch(geocodingUrl);
         if (res.ok) {
           const json = await res.json();
