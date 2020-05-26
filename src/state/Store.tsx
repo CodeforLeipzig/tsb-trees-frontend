@@ -41,8 +41,8 @@ const initialState = {
   AppState: 'watered',
   hoveredObject: false,
   viewport: {
-    latitude: 52.500869,
-    longitude: 13.419047,
+    latitude: 51.3399028,
+    longitude: 12.3742236,
     zoom: isMobile ? 13 : 11,
     maxZoom: 19,
     minZoom: isMobile ? 11 : 9,
