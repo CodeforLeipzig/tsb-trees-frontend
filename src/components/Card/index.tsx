@@ -66,13 +66,12 @@ const Card = p => {
   const { getTokenSilently, isAuthenticated } = useAuth0();
 
   const {
-    Pflanzjahr,
-    radolan_sum = 100,
-    Baumart_wi: artdtsch,
-    radolan_days = [],
-    Baumart_de: gattungdeutsch,
+    standalter,
+    radolan_sum,
+    artdtsch,
+    radolan_days,
+    gattungdeutsch,
   } = data;
-  const standalter = 2020 - Pflanzjahr;
 
   const getTreeProp = (p: Generic | string | null) => {
     return p === 'null' ? null : p;
