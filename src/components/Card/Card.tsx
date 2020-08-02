@@ -89,13 +89,18 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
   const { getTokenSilently, isAuthenticated } = useAuth0();
 
   const {
-    standalter,
+    standAlter: standalterOrg,
+    pflanzjahr,
     radolan_sum,
-    artdtsch,
+    artDtsch,
     radolan_days,
-    gattungdeutsch,
+    gattungDeutsch,
     caretaker,
   } = data;
+  const currentYear = new Date().getFullYear();
+  const standalter = standalterOrg || currentYear - pflanzjahr;
+
+  console.log("data %j", data)
 
   const getTreeProp = (p: Generic | string | null) => {
     return p === 'null' || p === undefined ? null : p;
@@ -139,19 +144,19 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
     }).catch(console.error);
   }, [user, selectedTree, treeAdopted]);
 
-  const treeType = treetypes.find(treetype => treetype.id === gattungdeutsch);
+  const treeType = treetypes.find(treetype => treetype.id === gattung);
 
   return (
     <CardWrapper>
       <FlexColumnDiv>
-        <TreeTitle>{artdtsch}</TreeTitle>
+        <TreeTitle>{artDtsch}</TreeTitle>
         {!treeType &&
           treeType !== 'undefined' &&
-          gattungdeutsch !== null &&
-          gattungdeutsch !== 'undefined' &&
-          gattungdeutsch !== undefined && (
+          gattungDeutsch !== null &&
+          gattungDeutsch !== 'undefined' &&
+          gattungDeutsch !== undefined && (
             <SublineSpan>
-              {getTreeProp(gattungdeutsch.toLowerCase())}
+              {getTreeProp(gattungDeutsch.toLowerCase())}
             </SublineSpan>
           )}
         {caretaker && caretaker.length > 0 && (
