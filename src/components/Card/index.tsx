@@ -66,12 +66,17 @@ const Card = p => {
   const { getTokenSilently, isAuthenticated } = useAuth0();
 
   const {
-    standalter,
+    standAlter: standalterOrg,
+    pflanzjahr,
     radolan_sum,
-    artdtsch,
+    artDtsch,
     radolan_days,
-    gattungdeutsch,
+    gattungDeutsch,
   } = data;
+  const currentYear = new Date().getFullYear();
+  const standalter = standalterOrg || currentYear - pflanzjahr;
+
+  console.log("data %j", data)
 
   const getTreeProp = (p: Generic | string | null) => {
     return p === 'null' ? null : p;
@@ -117,14 +122,14 @@ const Card = p => {
     }).catch(console.error);
   }, [user, selectedTree, treeAdopted]);
 
-  const treeType = treetypes.find(treetype => treetype.id === gattungdeutsch);
+  const treeType = treetypes.find(treetype => treetype.id === gattung);
 
   return (
     <CardWrapper>
       <FlexColumnDiv>
-        <TreeTitle>{artdtsch}</TreeTitle>
+        <TreeTitle>{artDtsch}</TreeTitle>
         {!treeType && treeType !== 'undefined' && (
-          <SublineSpan>{getTreeProp(gattungdeutsch && gattungdeutsch.toLowerCase())}</SublineSpan>
+          <SublineSpan>{getTreeProp(gattungDeutsch && gattungDeutsch.toLowerCase())}</SublineSpan>
         )}
         {treeAdopted && <ButtonAdopted />}
         {treeType && treeType.title !== null && (
