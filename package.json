@@ -6,18 +6,11 @@
     "test": "inpyjamas-scripts test",
     "eslint": "eslint ./src/",
     "brechstange": "eslint --fix ./src/",
-<<<<<<< HEAD
     "start": "cross-env BUILD_TARGET=DEFAULT NODE_ENV=development webpack-dev-server --config webpack/dev.config.js",
     "start:demo": "cross-env BUILD_TARGET=DEMO NODE_ENV=development webpack-dev-server --config webpack/dev.config.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js && echo '/* /index.html 200' | cat >dist/_redirects",
     "prettier:list": "prettier --list-different './src/**/*'",
     "prettier:write": "prettier --write './src/**/*'"
-=======
-    "start": "./node_modules/.bin/webpack-dev-server --config webpack/dev.config.js",
-    "build": "./node_modules/.bin/webpack --config webpack/prod.config.js && echo '/* /index.html 200' | cat >dist/_redirects",
-    "prettier:list": "./node_modules/.bin/prettier --list-different './src/**/*'",
-    "prettier:write": "./node_modules/.bin/prettier --write './src/**/*'"
->>>>>>> 7b69b97... Use commands from node_modules/.bin
   },
   "keywords": [],
   "author": "Fabian Dinklage",
