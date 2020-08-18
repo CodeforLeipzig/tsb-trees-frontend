@@ -135,7 +135,7 @@ const Cardlegend = () => {
       <Flex>
         <StyledCardDescription>Baumalter</StyledCardDescription>
         <StyledCardDescriptionSecond>
-          Erkunde die Geschichte von Berlins Baumlandschaft
+          Erkunde die Geschichte von Leipzigs Baumlandschaft
         </StyledCardDescriptionSecond>
         <SidebarSearchAge />
       </Flex>

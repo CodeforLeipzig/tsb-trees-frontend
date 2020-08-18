@@ -60,9 +60,9 @@ const Cookie = p => {
               ermöglichen und das Angebot zu verbessern. Indem du hier
               fortfährst stimmst du der Nutzung von Cookies zu.{' '}
               <a
-                href='https://www.technologiestiftung-berlin.de/de/datenschutz/'
-                target='_blank'
-                rel='noopener noreferrer'
+                href="https://codefor.de/datenschutz/"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Weitere Informationen.
               </a>
