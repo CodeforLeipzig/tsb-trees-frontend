@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const logoCitylab = '/images/citylab-logo.svg';
-const logoTSB = '/images/tsb-logo-coloured.svg';
-const logoBerlin = '/images/berlin.svg';
+const logoCodeForLeipzig = '/images/cfg-leipzig-logo.svg';
+const logoWirImQuartier = '/images/wiq-logo.svg';
+const logoStiftungEckenWecken = '/images/sew-logo.png';
 
 const StyledCreditsContainer = styled.div`
   width: 150px;
@@ -32,14 +33,26 @@ const StyledCreditsContainer = styled.div`
       margin: 10px 0 5px 0;
     }
   }
-`;
 
-const FoerderlogoContainer = styled.div`
-  margin-top: 10px;
+  a.wiq {
+    img {
+      width: 150px;
+      margin: 10px 0 5px 0;
+    }
+  }
 
-  img.berlin {
-    width: 120px;
-    margin: 10px 0 5px 0;
+  a.sew {
+    img {
+      width: 150px;
+      margin: 10px 0 5px 0;
+    }
+  }
+
+  a.cfg {
+    img {
+      width: 150px;
+      margin: 10px 0 5px 0;
+    }
   }
 `;
 
@@ -47,26 +60,40 @@ const Credits = p => {
   return (
     <StyledCreditsContainer>
       <a
-        className='citylab'
-        href='https://citylab-berlin.org'
+        className='wiq'
+        href='https://stiftung-ecken-wecken.de/WIQ'
         rel='noopener noreferrer'
         target='_blank'
       >
-        <img src={logoCitylab} alt='Logo Citylab' />
+        <img src={logoWirImQuartier} alt='Logo Wir im Quartier' />
       </a>
       <span>Ein Projekt der</span>
       <a
-        className='tsb'
-        href='https://technologiestiftung-berlin.de'
+        className='seq'
+        href='https://stiftung-ecken-wecken.de'
         target='_blank'
         rel='noopener noreferrer'
       >
-        <img src={logoTSB} alt='Logo Technologiestiftung Berlin' />
+        <img src={logoStiftungEckenWecken} alt='Logo Stiftung Ecken Wecken' />
       </a>
-      <FoerderlogoContainer>
-        <span>Gefördert durch</span>
-        <img className='berlin' src={logoBerlin} alt='Logo Berlin' />
-      </FoerderlogoContainer>
+      <span>Migriert für Leipzig</span>
+      <a
+        className='cfg'
+        href='https://codefor.de/leipzig'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        <img src={logoCodeForLeipzig} alt='Logo Code for Leipzig' />
+      </a>
+      <span>Unterstützt von</span>
+      <a
+        className='citylab'
+        href='https://www.citylab-berlin.org'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        <img src={logoCitylab} alt='Logo CityLab Berlin' />
+      </a>
     </StyledCreditsContainer>
   );
 };
