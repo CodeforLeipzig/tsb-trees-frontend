@@ -23,10 +23,10 @@ const OpenSourceNote = () => {
     <OpenSourceContainer>
 	  <GithubIcon alt='GitHub Mark' src={iconGithub} />
       <CardDescription>
-        Giess den Kiez ist ein&nbsp;
+        Giess dein Viertel ist ein&nbsp;
         <a
           target='blank'
-          href='https://github.com/technologiestiftung/giessdenkiez-de'
+          href='https://github.com/codeforleipzig/tsb-trees-frontend'
         >
           Open Source Projekt!
         </a>
