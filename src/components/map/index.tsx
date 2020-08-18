@@ -377,7 +377,7 @@ class DeckGLMap extends React.Component {
 
       map.addSource('trees', {
         type: 'vector',
-        url: 'mapbox://technologiestiftung.trees_s3',
+        url: 'mapbox://sannsie.6tujqvnq',
         minzoom: 11,
         maxzoom: 20,
       });

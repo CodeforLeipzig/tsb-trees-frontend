@@ -228,17 +228,6 @@ const Legend = p => {
             <StyledItemLabel>Straßen- & Anlagenbäume</StyledItemLabel>
           </UnstyledFlexWidth>
           <UnstyledFlexWidth
-            active={pumpsVisible}
-            onClick={() => {
-              store.setState({ treesVisible: false });
-              store.setState({ pumpsVisible: !pumpsVisible });
-              store.setState({ rainVisible: false });
-            }}
-          >
-            <StrokedLegendDot />
-            <StyledItemLabel>Öffentl. Pumpe</StyledItemLabel>
-          </UnstyledFlexWidth>
-          <UnstyledFlexWidth
             active={rainVisible}
             onClick={() => {
               store.setState({ treesVisible: false });
