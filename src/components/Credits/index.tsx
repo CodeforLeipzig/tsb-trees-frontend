@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const logoCitylab = '/images/citylab-logo.svg';
 const logoCodeForLeipzig = '/images/cfg-leipzig-logo.svg';
-const logoWirImQuartier = '/images/wiq-logo.svg';
+const logoWirImQuartier = '/images/wiq-logo.png';
 const logoStiftungEckenWecken = '/images/sew-logo.png';
 
 const StyledCreditsContainer = styled.div`
@@ -69,7 +69,7 @@ const Credits = p => {
       </a>
       <span>Ein Projekt der</span>
       <a
-        className='seq'
+        className='sew'
         href='https://stiftung-ecken-wecken.de'
         target='_blank'
         rel='noopener noreferrer'
