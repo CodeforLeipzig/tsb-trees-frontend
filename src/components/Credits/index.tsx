@@ -29,28 +29,28 @@ const StyledCreditsContainer = styled.div`
 
   a.citylab {
     img {
-      height: 50px;
+      width: 100px;
       margin: 10px 0 5px 0;
     }
   }
 
   a.wiq {
     img {
-      height: 50px;
+      height: 40px;
       margin: 10px 0 5px 0;
     }
   }
 
   a.sew {
     img {
-      height: 80px;
+      height: 60px;
       margin: 10px 0 5px 0;
     }
   }
 
   a.cfg {
     img {
-      height: 50px;
+      height: 40px;
       margin: 10px 0 5px 0;
     }
   }
