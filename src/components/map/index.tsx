@@ -42,6 +42,7 @@ const ControlWrapper = styled.div<StyledProps>`
 let map = null;
 let selectedStateId = false;
 
+<<<<<<< HEAD
 const MAPBOX_TOKEN = process.env.API_KEY;
 const pumpsColor: (info: Generic) => RGBAColor = info => {
   if (info === undefined) {
@@ -71,6 +72,8 @@ const pumpsColor: (info: Generic) => RGBAColor = info => {
   return defaultColor.rgba;
 };
 
+=======
+>>>>>>> retrieve mapbox token as env again
 class DeckGLMap extends React.Component {
   constructor(props) {
     super(props);
@@ -593,6 +596,7 @@ class DeckGLMap extends React.Component {
       return <span>Lade Leipzigs Baumdaten ...</span>;
     } else if (!isTreeDataLoading) {
       return (
+<<<<<<< HEAD
         <>
           {/* THis code below could be used to display some info for the pumps */}
           {isMobile === false &&
@@ -647,6 +651,48 @@ class DeckGLMap extends React.Component {
             )}
           </DeckGL>
         </>
+=======
+        <DeckGL
+          layers={this._renderLayers()}
+          initialViewState={viewport}
+          viewState={viewport}
+          getCursor={e => {
+            return this.state.cursor;
+          }}
+          onHover={(info, event) => {
+            this.setCursor(info.layer);
+          }}
+          onClick={this._deckClick}
+          onViewStateChange={e => this.handleDrag(e)}
+          controller={controller}
+        >
+          {baseMap && (
+            <StaticMap
+              reuseMaps
+              mapStyle='mapbox://styles/mapbox/light-v9'
+              preventStyleDiffing={true}
+              mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
+              onLoad={this._onload.bind(this)}
+            >
+              <ControlWrapper isNavOpen={isNavOpen}>
+                {/* {this.state.geoLocationAvailable === true && ( */}
+                {/* <GeolocateControl
+                  positionOptions={{ enableHighAccuracy: true }}
+                  trackUserLocation={true}
+                  onViewStateChange={e => setView(e.viewState)}
+                  onGeolocate={options => {
+                    console.log(options, 'in geolocateControl');
+                  }}
+                /> */}
+                {/* )} */}
+                <NavigationControl
+                  onViewStateChange={e => setView(e.viewState)}
+                />
+              </ControlWrapper>
+            </StaticMap>
+          )}
+        </DeckGL>
+>>>>>>> retrieve mapbox token as env again
       );
     }
   }
