@@ -88,9 +88,6 @@ export const loadData = (store: Store<StoreProps>) => async () => {
 
     const rainGeojson = await requests(dataUrl);
     store.setState({ rainGeojson });
-    // load min version
-    const pumps = await requests('/data/pumps.geojson.min.json');
-    store.setState({ pumps });
   } catch (error) {
     console.error(error);
   }
