@@ -69,12 +69,10 @@ class DeckGLMap extends React.Component {
       data,
       rainGeojson,
       treesVisible,
-      pumpsVisible,
       rainVisible,
-      pumps,
     } = this.props;
 
-    if (data && rainGeojson && pumps) {
+    if (data && rainGeojson) {
       const layers = [
         new GeoJsonLayer({
           id: 'geojson',
@@ -121,13 +119,13 @@ class DeckGLMap extends React.Component {
             // eslint-disable-next-line @typescript-eslint/camelcase
             const { id, radolan_sum, age } = properties;
 
-            if (dataView === 'watered' && Array.isArray(communityData) && communityData[id]) {
+            if (dataView === 'watered' && communityData[id]) {
               return communityData[id].watered
                 ? [53, 117, 177, 200]
                 : [0, 0, 0, 0];
             }
 
-            if (dataView === 'adopted' && Array.isArray(communityData) && communityData[id]) {
+            if (dataView === 'adopted' && communityData[id]) {
               return communityData[id].adopted
                 ? [0, 128, 128, 200]
                 : [0, 0, 0, 0];
@@ -137,7 +135,7 @@ class DeckGLMap extends React.Component {
               return [0, 0, 0, 0];
             }
 
-            if (age >= ageRange[0] && age <= ageRange[1]) {
+            if (age >= parseInt(ageRange[0]) && age <= parseInt(ageRange[1])) {
               const interpolated = interpolateColor(radolan_sum);
               const hex = hexToRgb(interpolated);
 
@@ -196,35 +194,6 @@ class DeckGLMap extends React.Component {
             return hex;
           },
           pickable: true,
-        }),
-        new GeoJsonLayer({
-          id: 'pumps',
-          data: pumps,
-          opacity: 1,
-          visible: pumpsVisible,
-          stroked: true,
-          filled: false,
-          extruded: true,
-          wireframe: true,
-          getElevation: 1,
-          getLineColor: [44, 48, 59, 200],
-          getFillColor: [0, 0, 0, 0],
-          getRadius: 9,
-          pointRadiusMinPixels: 4,
-          pickable: true,
-          lineWidthScale: 2,
-          lineWidthMinPixels: 1,
-          // onHover: info => {
-          //   if (info.object === undefined) {
-          //     this.setState({ isHovered: false });
-          //     return;
-          //   }
-          //   this.setState({ isHovered: true });
-          //   console.log(info);
-          //   this.setState({ hoverObjectMessage: info.object.geometry.type });
-          //   this.setState({ hoverObjectPointer: [info.x, info.y] });
-          //   console.log(this.state);
-          // },
         }),
       ];
 
@@ -582,8 +551,6 @@ export default connect(
     data: state.data,
     rainGeojson: state.rainGeojson,
     dataView: state.dataView,
-    pumps: state.pumps,
-    pumpsVisible: state.pumpsVisible,
     isLoading: state.isLoading,
     isNavOpen: state.isNavOpen,
     wateredTrees: wateredTreesSelector(state),

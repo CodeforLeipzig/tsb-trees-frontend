@@ -83,8 +83,8 @@ export const loadData = (store: Store<StoreProps>) => async () => {
     //   .then(res => res.json())
     //   .then(r => Store.setState({ rainGeojson: r }))
     //   .catch(console.error);
-    const pumps = await requests('/data/pumps.geojson');
-    store.setState({ pumps });
+    //const pumps = await requests('/data/pumps.geojson');
+    //store.setState({ pumps });
     // fetch('/data/pumps.geojson')
     //   .then(r => r.json())
     //   .then(r => Store.setState({ pumps: r }))

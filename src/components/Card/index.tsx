@@ -70,13 +70,13 @@ const Card = p => {
     pflanzjahr,
     radolan_sum,
     artDtsch,
+    artBot,
     radolan_days,
+    gattung,
     gattungDeutsch,
   } = data;
   const currentYear = new Date().getFullYear();
-  const standalter = standalterOrg || currentYear - pflanzjahr;
-
-  console.log("data %j", data)
+  const standalter = standalterOrg || (pflanzjahr && (currentYear - pflanzjahr));
 
   const getTreeProp = (p: Generic | string | null) => {
     return p === 'null' ? null : p;
@@ -122,14 +122,14 @@ const Card = p => {
     }).catch(console.error);
   }, [user, selectedTree, treeAdopted]);
 
-  const treeType = treetypes.find(treetype => treetype.id === gattung);
+  const treeType = treetypes.find(treetype => treetype.id === gattungDeutsch);
 
   return (
     <CardWrapper>
       <FlexColumnDiv>
         <TreeTitle>{artDtsch}</TreeTitle>
-        {!treeType && treeType !== 'undefined' && (
-          <SublineSpan>{getTreeProp(gattungDeutsch && gattungDeutsch.toLowerCase())}</SublineSpan>
+        {treeType && treeType !== 'undefined' && (
+          <SublineSpan>{getTreeProp(gattung && gattung.toLowerCase())}</SublineSpan>
         )}
         {treeAdopted && <ButtonAdopted />}
         {treeType && treeType.title !== null && (
@@ -143,7 +143,13 @@ const Card = p => {
             <TreeType>{treeType.description}</TreeType>
           </CardAccordion>
         )}
-        {standalter && standalter !== 'undefined' && (
+        {artBot && (
+          <CardProperty name='Name (wiss.)' value={artBot} />
+        )}
+        {gattung && (
+          <CardProperty name='Gattung (wiss.)' value={gattung} />
+        )}
+        {standalter !== 'null' && standalter !== 'undefined' && (
           <CardProperty name='Standalter' value={standalter + ' Jahre'} />
         )}
         {standalter !== 'null' && standalter !== 'undefined' && (
@@ -151,9 +157,9 @@ const Card = p => {
             title={
               <CardAccordionTitle>
                 Wasserbedarf:
-                {standalter && (
+                {
                   <CardWaterDrops data={waterNeed(parseInt(standalter))} />
-                )}
+                }
               </CardAccordionTitle>
             }
           >
