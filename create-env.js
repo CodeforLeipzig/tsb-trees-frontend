@@ -9,5 +9,6 @@ AUTH0_AUDIENCE=${process.env.AUTH0_AUDIENCE}\n
 USER_DATA_API_URL=${process.env.USER_DATA_API_URL}\n
 API_ENDPOINT_DEV=${process.env.API_ENDPOINT_DEV}\n
 API_ENDPOINT_PROD=${process.env.API_ENDPOINT_PROD}\n
+MAPBOX_TOKEN=${process.env.MAPBOX_TOKEN}\n
 `;
 fs.writeFileSync('./.env', envVars);

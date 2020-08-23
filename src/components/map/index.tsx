@@ -39,8 +39,6 @@ const ControlWrapper = styled.div<StyledProps>`
 let map = null;
 let selectedStateId = false;
 
-const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2FubnNpZSIsImEiOiJja2FndTc0ajAwOXlwMnBvNGl6dW16MjVpIn0.2vuHVqIK5bDNcoWMmi3VtQ';
-
 class DeckGLMap extends React.Component {
   constructor(props) {
     super(props);
@@ -534,46 +532,46 @@ class DeckGLMap extends React.Component {
       return <span>Lade Leipzigs Baumdaten ...</span>;
     } else if (!isLoading) {
       return (
-        <>
-          {/* THis code below could be used to display some info for the pumps */}
-          {/* {this.state.isHovered &&
-            this.state.hoverObjectPointer.length === 2 && (
-              <HoverObject
-                message={this.state.hoverObjectMessage}
-                pointer={this.state.hoverObjectPointer}
-              ></HoverObject>
-            )} */}
-          <DeckGL
-            layers={this._renderLayers()}
-            initialViewState={viewport}
-            viewState={viewport}
-            getCursor={e => {
-              return this.state.cursor;
-            }}
-            onHover={(info, event) => {
-              this.setCursor(info.layer);
-            }}
-            onClick={this._deckClick}
-            onViewStateChange={e => this.handleDrag(e)}
-            controller={controller}
-          >
-            {baseMap && (
-              <StaticMap
-                reuseMaps
-                mapStyle='mapbox://styles/mapbox/light-v9'
-                preventStyleDiffing={true}
-                mapboxApiAccessToken={MAPBOX_TOKEN}
-                onLoad={this._onload.bind(this)}
-              >
-                <ControlWrapper isNavOpen={isNavOpen}>
-                  <NavigationControl
-                    onViewStateChange={e => setView(e.viewState)}
-                  />
-                </ControlWrapper>
-              </StaticMap>
-            )}
-          </DeckGL>
-        </>
+        <DeckGL
+          layers={this._renderLayers()}
+          initialViewState={viewport}
+          viewState={viewport}
+          getCursor={e => {
+            return this.state.cursor;
+          }}
+          onHover={(info, event) => {
+            this.setCursor(info.layer);
+          }}
+          onClick={this._deckClick}
+          onViewStateChange={e => this.handleDrag(e)}
+          controller={controller}
+        >
+          {baseMap && (
+            <StaticMap
+              reuseMaps
+              mapStyle='mapbox://styles/mapbox/light-v9'
+              preventStyleDiffing={true}
+              mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
+              onLoad={this._onload.bind(this)}
+            >
+              <ControlWrapper isNavOpen={isNavOpen}>
+                {/* {this.state.geoLocationAvailable === true && ( */}
+                {/* <GeolocateControl
+                  positionOptions={{ enableHighAccuracy: true }}
+                  trackUserLocation={true}
+                  onViewStateChange={e => setView(e.viewState)}
+                  onGeolocate={options => {
+                    console.log(options, 'in geolocateControl');
+                  }}
+                /> */}
+                {/* )} */}
+                <NavigationControl
+                  onViewStateChange={e => setView(e.viewState)}
+                />
+              </ControlWrapper>
+            </StaticMap>
+          )}
+        </DeckGL>
       );
     }
   }
