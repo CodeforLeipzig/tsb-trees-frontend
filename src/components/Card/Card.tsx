@@ -93,14 +93,14 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
     pflanzjahr,
     radolan_sum,
     artDtsch,
+    artBot,
     radolan_days,
+    gattung,
     gattungDeutsch,
     caretaker,
   } = data;
   const currentYear = new Date().getFullYear();
-  const standalter = standalterOrg || currentYear - pflanzjahr;
-
-  console.log("data %j", data)
+  const standalter = standalterOrg || (pflanzjahr && (currentYear - pflanzjahr));
 
   const getTreeProp = (p: Generic | string | null) => {
     return p === 'null' || p === undefined ? null : p;
@@ -144,7 +144,7 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
     }).catch(console.error);
   }, [user, selectedTree, treeAdopted]);
 
-  const treeType = treetypes.find(treetype => treetype.id === gattung);
+  const treeType = treetypes.find(treetype => treetype.id === gattungDeutsch);
 
   return (
     <CardWrapper>
@@ -177,7 +177,13 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
             <TreeType>{treeType.description}</TreeType>
           </CardAccordion>
         )}
-        {standalter && standalter !== 'undefined' && (
+        {artBot && (
+          <CardProperty name='Name (wiss.)' value={artBot} />
+        )}
+        {gattung && (
+          <CardProperty name='Gattung (wiss.)' value={gattung} />
+        )}
+        {standalter !== 'null' && standalter !== 'undefined' && (
           <CardProperty name='Standalter' value={standalter + ' Jahre'} />
         )}
         {standalter !== 'null' && standalter !== 'undefined' && (
@@ -185,9 +191,9 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
             title={
               <CardAccordionTitle>
                 Wasserbedarf:
-                {standalter && (
+                {
                   <CardWaterDrops data={waterNeed(parseInt(standalter))} />
-                )}
+                }
               </CardAccordionTitle>
             }
           >
