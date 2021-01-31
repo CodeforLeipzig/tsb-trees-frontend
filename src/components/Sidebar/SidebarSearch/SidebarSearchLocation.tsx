@@ -58,8 +58,8 @@ const ResultElement = styled.li`
   }
 `;
 
-const SidebarSearchLocation = p => {
-  const { setViewport } = p;
+const SidebarSearchLocation: React.FC = () => {
+  const { setViewport } = useActions(Actions);
 
   const [value, setValue] = React.useState('');
   const [results, setResults] = React.useState([]);
