@@ -89,18 +89,18 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
   const { getTokenSilently, isAuthenticated } = useAuth0();
 
   const {
-    standAlter: standalterOrg,
+    standalter: standalterOrg,
     pflanzjahr,
     radolan_sum,
-    artDtsch,
-    artBot,
+    artdtsch,
+    artbot,
     radolan_days,
     gattung,
-    gattungDeutsch,
+    gattungdeutsch,
     caretaker,
   } = data;
   const currentYear = new Date().getFullYear();
-  const standalter = standalterOrg || (pflanzjahr && (currentYear - pflanzjahr));
+  const standalter = standalterOrg || (pflanzjahr && (currentYear - parseInt(pflanzjahr)));
 
   const getTreeProp = (p: Generic | string | null) => {
     return p === 'null' || p === undefined ? null : p;
@@ -144,19 +144,19 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
     }).catch(console.error);
   }, [user, selectedTree, treeAdopted]);
 
-  const treeType = treetypes.find(treetype => treetype.id === gattungDeutsch);
+  const treeType = treetypes.find(treetype => treetype.id === gattungdeutsch);
 
   return (
     <CardWrapper>
       <FlexColumnDiv>
-        <TreeTitle>{artDtsch}</TreeTitle>
+        <TreeTitle>{artdtsch}</TreeTitle>
         {!treeType &&
           treeType !== 'undefined' &&
-          gattungDeutsch !== null &&
-          gattungDeutsch !== 'undefined' &&
-          gattungDeutsch !== undefined && (
+          gattungdeutsch !== null &&
+          gattungdeutsch !== 'undefined' &&
+          gattungdeutsch !== undefined && (
             <SublineSpan>
-              {getTreeProp(gattungDeutsch.toLowerCase())}
+              {getTreeProp(gattungdeutsch.toLowerCase())}
             </SublineSpan>
           )}
         {caretaker && caretaker.length > 0 && (
@@ -177,8 +177,8 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
             <TreeType>{treeType.description}</TreeType>
           </CardAccordion>
         )}
-        {artBot && (
-          <CardProperty name='Name (wiss.)' value={artBot} />
+        {artbot && (
+          <CardProperty name='Name (wiss.)' value={artbot} />
         )}
         {gattung && (
           <CardProperty name='Gattung (wiss.)' value={gattung} />
@@ -191,9 +191,9 @@ const Card: React.FC<{ data: Tree }> = ({ data }) => {
             title={
               <CardAccordionTitle>
                 Wasserbedarf:
-                {
-                  <CardWaterDrops data={waterNeed(parseInt(standalter))} />
-                }
+                {standalter && (
+                  <CardWaterDrops data={waterNeed(parseInt(String(standalter)))} />
+                )}
               </CardAccordionTitle>
             }
           >

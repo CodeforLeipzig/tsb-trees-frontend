@@ -542,7 +542,7 @@ class DeckGLMap extends React.Component {
                 reuseMaps
                 mapStyle='mapbox://styles/mapbox/light-v9'
                 preventStyleDiffing={true}
-                mapboxApiAccessToken={MAPBOX_TOKEN}
+                mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
                 onLoad={this._onload.bind(this)}
               >
                 {!overlay && (
@@ -566,13 +566,7 @@ export default connect(
     data: state.data,
     rainGeojson: state.rainGeojson,
     dataView: state.dataView,
-<<<<<<< HEAD
-    pumps: state.pumps,
-    pumpsVisible: state.pumpsVisible,
     isTreeDataLoading: state.isTreeDataLoading,
-=======
-    isLoading: state.isLoading,
->>>>>>> show additional attributes, fix adopted / watered filter, remove pumps
     isNavOpen: state.isNavOpen,
     overlay: state.overlay,
     wateredTrees: wateredTreesSelector(state),
