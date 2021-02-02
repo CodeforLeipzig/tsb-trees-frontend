@@ -57,7 +57,6 @@ const CardProgress = p => {
       id: 'liters',
     },
   ];
-
   return (
     <Flex>
       {progressItems.map(item => (
