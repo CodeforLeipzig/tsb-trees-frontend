@@ -7,6 +7,8 @@ import { Store } from 'unistore';
 import { SelectedTreeType, StoreProps, Generic } from '../common/interfaces';
 import { TreeLastWateredType } from '../common/types';
 
+var isLocalTesting = process.env.LOCAL_TESTING
+
 interface TreeLastWateredResponseType {
   data: TreeLastWateredType | undefined;
 }
@@ -25,15 +27,28 @@ export const loadTrees = (store: Store<StoreProps>) => async () => {
       isTreeDataLoading: false,
     });
   } else {
-    const dataUrl = process.env.TREE_DATA_URL || 'https://trees-radolan-harvester-leipzig-dev.s3.eu-central-1.amazonaws.com/trees.csv.gz';
-
-    d3Dsv(',', dataUrl, { cache: 'force-cache' })
+    if (isLocalTesting) {
+      const csvData = [{
+        'id': 'id-54243',
+        'lng': 12.465195780349760,
+        'lat': 51.436408951092531,
+        'radolan_sum': 457,
+        'age': 25
+      }]
+  
+      const geojson = createGeojson(csvData);
+      store.setState({ data: geojson, isTreeDataLoading: false });
+      return;  
+    } else {
+      const dataUrl = process.env.TREE_DATA_URL || 'https://trees-radolan-harvester-leipzig-dev.s3.eu-central-1.amazonaws.com/trees.csv.gz';
+      d3Dsv(',', dataUrl, { cache: 'force-cache' })
       .then(data => {
         const geojson = createGeojson(data);
         store.setState({ data: geojson, isTreeDataLoading: false });
         return;
       })
       .catch(console.error);
+    }
   }
 };
 
@@ -81,10 +96,13 @@ export const loadData = (store: Store<StoreProps>) => async () => {
   try {
     store.setState({ isTreeDataLoading: true });
     // let geojson = [];
-
-    const dataUrl = process.env.WEATHER_DATA_URL || 'https://trees-radolan-harvester-leipzig-dev.s3.eu-central-1.amazonaws.com/weather_light.geojson.gz';
-
-    const rainGeojson = await requests(dataUrl);
+    var rainGeojson;
+    if (isLocalTesting) {
+      rainGeojson = {"type":"FeatureCollection","properties":{"start":"2021-01-07 00:50:00","end":"2021-02-05 23:50:00"},"features":[{"type":"Feature","geometry":{"type":"MultiPolygon","coordinates":[[[[12.43489,51.46228],[12.44866,51.46191],[12.44808,51.45333],[12.46185,51.45296],[12.46126,51.44438],[12.43372,51.44511],[12.43489,51.46228]]]]},"properties":{"id":8911,"data":[441]}}]}
+    } else {
+      const dataUrl = process.env.WEATHER_DATA_URL || 'https://trees-radolan-harvester-leipzig-dev.s3.eu-central-1.amazonaws.com/weather_light.geojson.gz';
+      rainGeojson = await requests(dataUrl);
+    }
     store.setState({ rainGeojson });
   } catch (error) {
     console.error(error);
@@ -106,8 +124,8 @@ export const setDataView = (_state, payload) => {
 function setViewport(_state, payload) {
   return {
     viewport: {
-      latitude: payload[0],
-      longitude: payload[1],
+      longitude: payload[0],
+      latitude: payload[1],
       zoom: 19,
       maxZoom: 19,
       transitionDuration: 2000,
@@ -140,6 +158,7 @@ export const getWateredTrees = Store => async () => {
     };
   } catch (error) {
     console.error(error);
+    return { wateredTrees: []};
   }
 };
 
