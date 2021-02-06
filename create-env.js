@@ -10,5 +10,7 @@ USER_DATA_API_URL=${process.env.USER_DATA_API_URL}\n
 API_ENDPOINT_DEV=${process.env.API_ENDPOINT_DEV}\n
 API_ENDPOINT_PROD=${process.env.API_ENDPOINT_PROD}\n
 MAPBOX_TOKEN=${process.env.MAPBOX_TOKEN}\n
+WEATHER_DATA_URL=${process.env.WEATHER_DATA_URL}\n
+TREE_DATA_URL=${process.env.TREE_DATA_URL}\n
 `;
 fs.writeFileSync('./.env', envVars);

@@ -25,8 +25,7 @@ export const loadTrees = (store: Store<StoreProps>) => async () => {
       isTreeDataLoading: false,
     });
   } else {
-    const dataUrl =
-      'https://trees-radolan-harvester-leipzig-dev.s3.eu-central-1.amazonaws.com/trees.csv.gz';
+    const dataUrl = process.env.TREE_DATA_URL || 'https://trees-radolan-harvester-leipzig-dev.s3.eu-central-1.amazonaws.com/trees.csv.gz';
 
     d3Dsv(',', dataUrl, { cache: 'force-cache' })
       .then(data => {
@@ -83,8 +82,7 @@ export const loadData = (store: Store<StoreProps>) => async () => {
     store.setState({ isTreeDataLoading: true });
     // let geojson = [];
 
-    const dataUrl =
-      'https://trees-radolan-harvester-leipzig-dev.s3.eu-central-1.amazonaws.com/weather_light.geojson.gz';
+    const dataUrl = process.env.WEATHER_DATA_URL || 'https://trees-radolan-harvester-leipzig-dev.s3.eu-central-1.amazonaws.com/weather_light.geojson.gz';
 
     const rainGeojson = await requests(dataUrl);
     store.setState({ rainGeojson });
