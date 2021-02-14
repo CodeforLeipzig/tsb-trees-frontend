@@ -28,6 +28,7 @@ export const loadTrees = (store: Store<StoreProps>) => async () => {
     });
   } else {
     if (isLocalTesting) {
+      // http://localhost:8080/search?location=id-54243
       const csvData = [{
         'id': 'id-54243',
         'lng': 12.465195780349760,

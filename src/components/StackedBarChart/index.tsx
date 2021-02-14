@@ -59,49 +59,19 @@ const StyledTooltipTotalSymbol = styled.span`
 
 const StackedBarChart: FC = () => {
   const { selectedTree } = useStoreState('selectedTree');
-<<<<<<< HEAD
   const { treeLastWatered } = useStoreState('treeLastWatered');
-=======
-  //const { treeLastWatered } = useStoreState('treeLastWatered');
-  /* const { data } = p;
-  const [, setScaleTime] = useState<ScaleLinear<number, number> | null>(null);
-  const [, setScaleRain] = useState<ScaleLinear<number, number> | null>(null); */
-  interface DailyWaterAmountsType {
-    timestamp: Date;
-    rainValue: number;
-    wateringValue: number;
-  }
->>>>>>> remove watered property for now
 
   const [waterAmountInLast30Days, setWaterAmountInLast30Days] = useState<
     DailyWaterAmountsType[] | null
   >(null);
 
   useEffect(() => {
-<<<<<<< HEAD
     if (!treeLastWatered || !treeLastWatered) return;
 
     setWaterAmountInLast30Days(
       mapStackedBarchartData({ selectedTree, treeLastWatered })
-=======
-    //if (treeLastWatered === null || treeLastWatered === undefined) return;
-
-    //const treeLastWateredMap = _createTreeLastWateredMap(treeLastWatered);
-    const selectedTreeMap = _createRadolanMap(selectedTree.radolan_days);
-
-    setWaterAmountInLast30Days(
-      Object.keys(selectedTreeMap).map(selectedTreeKey => {
-        const dailyAmount = selectedTreeMap[selectedTreeKey];
-
-        return {
-          timestamp: new Date(selectedTreeKey),
-          rainValue: dailyAmount,
-          wateringValue: /*treeLastWateredMap[selectedTreeKey] || */0,
-        };
-      })
->>>>>>> remove watered property for now
     );
-  }, [selectedTree/*, treeLastWatered*/]);
+  }, [selectedTree, treeLastWatered]);
 
   useEffect(() => {
     if (waterAmountInLast30Days === null) return;
